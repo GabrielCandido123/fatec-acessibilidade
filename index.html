@@ -75,7 +75,22 @@
       display: flex; gap: 8px; align-items: center; justify-content: flex-end;
       flex-wrap: wrap;
     }
- 
+
+    .font-btn {
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: rgba(17,24,39,.55);
+      color: var(--text);
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .font-btn:hover {
+      border-color: rgba(255,255,255,.18);
+      background: rgba(17,24,39,.8);
+    }
 
     .search{
       display: flex; gap: 8px; align-items: center;
@@ -272,8 +287,8 @@
             <div class="search-icon"></div>
             <div class="search-input">Buscar no portal… (falso input)</div>
           </div>
-         
-          
+          <button id="btn-decrease-font" class="font-btn" aria-label="Diminuir tamanho da fonte" title="Diminuir fonte">A-</button>
+          <button id="btn-increase-font" class="font-btn" aria-label="Aumentar tamanho da fonte" title="Aumentar fonte">A+</button>
         </div>
       </div>
     </div>
@@ -449,8 +464,28 @@
   </div>
 
   <script>
- 
+    const btnIncrease = document.getElementById('btn-increase-font');
+    const btnDecrease = document.getElementById('btn-decrease-font');
+    const root = document.documentElement;
+    
+    // Configurações de tamanho da fonte (min e max em pixels)
+    const minFontSize = 12;
+    const maxFontSize = 24;
+    let currentFontSize = 16; // Tamanho base definido no :root CSS
 
+    btnIncrease.addEventListener('click', () => {
+      if (currentFontSize < maxFontSize) {
+        currentFontSize += 2;
+        root.style.setProperty('--base-font', currentFontSize + 'px');
+      }
+    });
+
+    btnDecrease.addEventListener('click', () => {
+      if (currentFontSize > minFontSize) {
+        currentFontSize -= 2;
+        root.style.setProperty('--base-font', currentFontSize + 'px');
+      }
+    });
   </script>
 </body>
 </html>
