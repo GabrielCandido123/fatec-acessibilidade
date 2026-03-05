@@ -20,6 +20,13 @@
       --base-font: 16px;
     }
 
+    body.high-contrast {
+      --text: #22c55e;
+      --muted: #4ade80; /* Um verde mais suave para textos secundários */
+      --border: #ffffff;
+      --shadow: 0 4px 15px rgba(255, 255, 255, 0.4);
+    }
+
     * { box-sizing: border-box; }
     body{
       margin: 0;
@@ -283,6 +290,7 @@
         </div>
 
         <div class="tools">
+          <button id="btn-contrast" class="font-btn" aria-label="Alternar alto contraste" title="Alto contraste">◐</button>
           <div class="search" id="search">
             <div class="search-icon"></div>
             <div class="search-input">Buscar no portal… (falso input)</div>
@@ -485,6 +493,11 @@
         currentFontSize -= 2;
         root.style.setProperty('--base-font', currentFontSize + 'px');
       }
+    });
+
+    const btnContrast = document.getElementById('btn-contrast');
+    btnContrast.addEventListener('click', () => {
+      document.body.classList.toggle('high-contrast');
     });
   </script>
 </body>
